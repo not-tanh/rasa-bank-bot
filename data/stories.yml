@@ -1,0 +1,26 @@
+version: "2.0"
+
+stories:
+  - story: Thoát form hỏi địa chỉ
+    steps:
+      - action: exchange_rate_form
+      - active_loop: exchange_rate_form
+      - intent: stop
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_can_i_help
+
+  - story: Thoát form hỏi ngoại tệ
+    steps:
+      - action: address_form
+      - active_loop: address_form
+      - intent: stop
+      - action: action_deactivate_loop
+      - active_loop: null
+      - action: utter_can_i_help
+
+  - story: Không cần giúp gì
+    steps:
+      - action: utter_can_i_help
+      - intent: deny
+      - action: utter_goodbye

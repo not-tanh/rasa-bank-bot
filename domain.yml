@@ -1,0 +1,63 @@
+session_config:
+  session_expiration_time: 60
+  carry_over_slots_to_new_session: true
+intents:
+- greet
+- goodbye
+- affirm
+- deny
+- stop
+- compliment
+- thanks
+- ask_bank_name
+- ask_bot_name
+- ask_phone_number
+- ask_exchange_rate
+- ask_address
+entities:
+- account_number
+- currency
+slots:
+  city:
+    type: text
+    auto_fill: false
+    influence_conversation: true
+  currency:
+    type: text
+    auto_fill: false
+    influence_conversation: true
+  requested_slot:
+    type: unfeaturized
+    influence_conversation: false
+responses:
+  utter_greet:
+  - text: Xin chào quý khách!
+  utter_bot_name:
+  - text: Tôi là Vietinbot, chatbot của ngân hàng Vietinbank.
+  utter_thanks:
+  - text: Cảm ơn quý khách ạ!
+  utter_goodbye:
+  - text: Tạm biệt quý khách!
+  utter_phone_number:
+  - text: Quý khách có thể liên lạc tới số điện thoại 0 24 3941 8868 hoặc gọi tới
+      tổng đài 1900 558 868
+  utter_ask_currency:
+  - text: Quý khách muốn hỏi tỉ giá của ngoại tệ nào ạ?
+  utter_ask_city:
+  - text: Quý khách muốn hỏi địa chỉ ở thành phố nào ạ?
+  utter_can_i_help:
+  - text: Tôi có thể giúp gì được cho quý khách ạ?
+actions:
+- action_exchange_rate
+- action_bank_addresses
+- validate_exchange_rate_form
+- validate_address_form
+forms:
+  address_form:
+    city:
+    - entity: LOC
+      type: from_entity
+  exchange_rate_form:
+    currency:
+    - entity: currency
+      type: from_entity

@@ -1,0 +1,48 @@
+version: "2.0"
+nlu:
+  - regex: account_number
+    examples: |
+      - \d{12}
+  - lookup: currency
+    examples: |
+      - usd
+      - đô la mỹ
+      - đôla mỹ
+      - đô mỹ
+      - đô la
+      - đôla
+      - đô
+      - gbp
+      - bảng anh
+      - bảng
+      - pound
+      - yên nhật
+      - yen nhật
+      - yên
+      - yen
+  - synonym: usd
+    examples: |
+      - đô la mỹ
+      - đôla mỹ
+      - đô mỹ
+      - đô la
+      - đôla
+      - đô
+  - synonym: gbp
+    examples: |
+      - bảng anh
+      - bảng
+      - pound
+  - synonym: yen
+    examples: |
+      - yên nhật
+      - yen nhật
+      - yên
+  - synonym: sài gòn
+    examples: |
+      - tphcm
+      - thành phố hồ chí minh
+      - hồ chí minh
+      - tp. hồ chí minh
+      - tp.hcm
+      - sài thành

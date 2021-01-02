@@ -1,0 +1,71 @@
+version: "2.0"
+
+rules:
+
+- rule: Chào tạm biệt
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- rule: Chào hỏi ở đầu cuộc hội thoại
+  conversation_start: true
+  steps:
+  - intent: greet
+  - action: utter_greet
+
+- rule: Hỏi giúp gì được khi người dùng chào không phải ở đầu cuộc hội thoại
+  conversation_start: false
+  steps:
+  - intent: greet
+  - action: utter_can_i_help
+
+- rule: Trả lời số điện thoại ngân hàng
+  steps:
+    - intent: ask_phone_number
+    - action: utter_phone_number
+
+- rule: Trả lời thông tin về tên bot, tên ngân hàng
+  steps:
+    - or:
+        - intent: ask_bank_name
+        - intent: ask_bot_name
+    - action: utter_bot_name
+
+- rule: Trả lời khi người dùng khen hoặc cảm ơn
+  steps:
+    - or:
+        - intent: compliment
+        - intent: thanks
+    - action: utter_thanks
+
+- rule: Form tỉ giá ngoại tệ
+  steps:
+  - intent: ask_exchange_rate
+  - action: exchange_rate_form
+  - active_loop: exchange_rate_form
+
+- rule: Submit form tỉ giá ngoại tệ
+  condition:
+    - active_loop: exchange_rate_form
+  steps:
+    - action: exchange_rate_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: currency
+    - action: action_exchange_rate
+
+- rule: Form hỏi địa chỉ
+  steps:
+  - intent: ask_address
+  - action: address_form
+  - active_loop: address_form
+
+- rule: Submit form hỏi địa chỉ
+  condition:
+    - active_loop: address_form
+  steps:
+    - action: address_form
+    - active_loop: null
+    - slot_was_set:
+        - requested_slot: city
+    - action: action_bank_addresses

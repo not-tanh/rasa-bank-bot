@@ -1,0 +1,7 @@
+__pycache__
+*.db
+models/*
+events.*
+.DS_Store
+test.py
+.idea
